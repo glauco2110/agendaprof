@@ -1,0 +1,30 @@
+<form (ngSubmit)="salvar()" >
+    <div class="p-fluid">
+        <div class="field">
+            <label for="nome">Nome</label>
+            <input type="text" pInputText id="nome" name="nome" [(ngModel)]="servico.nome" required autofocus
+                   [ngClass]="{'ng-invalid ng-dirty' : submitted && !servico.nome}"/>
+            <small class="ng-dirty ng-invalid" *ngIf="submitted && !servico.nome">Nome é obrigatório.</small>
+        </div>
+
+        <div class="field">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" pInputTextarea [(ngModel)]="servico.descricao" required rows="3"
+                      cols="20"></textarea>
+        </div>
+
+        <div class="field">
+            <label for="valor">Valor</label>
+            <p-inputNumber id="valor" name="valor" [(ngModel)]="servico.valor" mode="currency" currency="BRL"
+                           required autofocus
+                           [ngClass]="{'ng-invalid ng-dirty' : submitted && !servico.valor}"
+                           locale="pt-BR"></p-inputNumber>
+            <small class="ng-dirty ng-invalid" *ngIf="submitted && !servico.valor">Valor é obrigatório.</small>
+        </div>
+    </div>
+
+    <button type="button" pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+            (click)="cancelar()"></button>
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" type="submit"></button>
+</form>
+
