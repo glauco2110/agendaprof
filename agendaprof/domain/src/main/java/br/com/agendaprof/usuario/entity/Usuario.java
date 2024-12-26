@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +15,7 @@ public class Usuario extends BaseEntity {
     private String login;
     private Senha senha;
     private Date ultimoLogin;
+    private List<EnumRoles> permissoes;
 
     public void validate() {
         if(nome == null || nome.isEmpty()) {

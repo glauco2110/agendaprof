@@ -1,6 +1,7 @@
-package br.com.agendaprof.usuario.security;
+package br.com.agendaprof.usuario.security.password;
 
 import br.com.agendaprof.usuario.entity.Senha;
+import br.com.agendaprof.usuario.security.PasswordEncryptionService;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.stereotype.Service;

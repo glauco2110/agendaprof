@@ -7,5 +7,4 @@ import java.util.Optional;
 
 public interface UsuarioRepository extends BaseCrudRepository<Usuario, Usuario> {
     Optional<Usuario> existeUsuarioMesmoLogin(Usuario servico);
-    Optional<Usuario> logar(String login, String senha);
 }

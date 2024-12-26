@@ -5,6 +5,7 @@ import br.com.agendaprof.core.mapper.BaseMapper;
 import br.com.agendaprof.usuario.entity.Usuario;
 import br.com.agendaprof.usuario.mapper.UsuarioMapper;
 import br.com.agendaprof.usuario.persistence.entity.UsuarioData;
+import br.com.agendaprof.usuario.persistence.repository.data.UsuarioDataRepository;
 import br.com.agendaprof.usuario.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UsuarioRepositoryImpl extends BaseRepository<Usuario, UsuarioData>  implements  UsuarioRepository {
 
+    private final UsuarioDataRepository repository;
     private final UsuarioMapper mapper;
 
     @Override
@@ -26,7 +28,7 @@ public class UsuarioRepositoryImpl extends BaseRepository<Usuario, UsuarioData> 
 
     @Override
     protected CrudRepository<UsuarioData, Long> getRepository() {
-        return null;
+        return repository;
     }
 
     @Override
@@ -39,8 +41,4 @@ public class UsuarioRepositoryImpl extends BaseRepository<Usuario, UsuarioData> 
         return Optional.empty();
     }
 
-    @Override
-    public Optional<Usuario> logar(String login, String senha) {
-        return Optional.empty();
-    }
 }

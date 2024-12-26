@@ -6,7 +6,7 @@ import {ServicoBaseProviderService} from "../../../core/service/servico-base.pro
 @Injectable({
   providedIn: 'root'
 })
-export class ServicoService  extends ServicoBase<Servico>{
+export class ServicoService  extends ServicoBase{
 
   constructor( servicoBaseProvider: ServicoBaseProviderService) {
       super(servicoBaseProvider);
