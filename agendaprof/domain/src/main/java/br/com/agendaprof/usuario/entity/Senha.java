@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class Senha {
     private static final String MSG_SENHA_INVALIDA = "A senha deve conter pelo menos uma letra ou caractere especial";
-    private static final String MSG_SENHA_VAZIA = "A senha não pode ser vazia";
+    private static final String MSG_SENHA_VAZIA = "Senha é de preenchimento obrigatorio";
     private static final String MSG_SENHA_MENOR_QUE_SEIS_CARACTERES = "A senha deve ter pelo menos 6 caracteres";
     private String valor;
     private Status status;

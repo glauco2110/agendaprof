@@ -21,7 +21,8 @@ public class InserirUsuario implements UseCase<InserirUsuarioCommand, InserirUsu
     @Override
     public InserirUsuarioOutput execute(InserirUsuarioCommand command) {
 
-        Senha senha = passwordEncryptionService.encrypt(new Senha(command.senha()));
+        final var rawSenha = new Senha(command.senha());
+        Senha senha = passwordEncryptionService.encrypt(rawSenha);
 
         Usuario usuario = new Usuario();
         usuario.setSenha(senha);
