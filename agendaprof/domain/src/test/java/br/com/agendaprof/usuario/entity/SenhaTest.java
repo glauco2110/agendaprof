@@ -46,7 +46,7 @@ public class SenhaTest {
     @Test
     void dadoQueTenhoValorVazio_quandoTentarCriarUmaSenha_deveRetornarErro(){
         final var expectedValor = "";
-        final var expectedMessage = "A senha não pode ser vazia";
+        final var expectedMessage = "Senha é de preenchimento obrigatorio";
 
         final var expectedException = assertThrows(RegraNegocioException.class, () -> new Senha(expectedValor));
 
@@ -56,7 +56,7 @@ public class SenhaTest {
     @Test
     void dadoQueNull_quandoTentarCriarUmaSenha_deveRetornarErro(){
         final String expectedValor = null;
-        final var expectedMessage = "A senha não pode ser vazia";
+        final var expectedMessage = "Senha é de preenchimento obrigatorio";
 
         final var expectedException = assertThrows(RegraNegocioException.class, () -> new Senha(expectedValor));
 
@@ -66,7 +66,7 @@ public class SenhaTest {
     @Test
     void dadoQueTenhoEspacosVazio_quandoTentarCriarUmaSenha_deveRetornarErro(){
         final var expectedValor = "      ";
-        final var expectedMessage = "A senha não pode ser vazia";
+        final var expectedMessage = "Senha é de preenchimento obrigatorio";
 
         final var expectedException = assertThrows(RegraNegocioException.class, () -> new Senha(expectedValor));
 
