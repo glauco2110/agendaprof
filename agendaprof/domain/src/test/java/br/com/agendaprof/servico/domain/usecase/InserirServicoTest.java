@@ -36,12 +36,13 @@ class InserirServicoTest {
         servico.setNome(expectedNome);
         servico.setDescricao(expectedDescricao);
         servico.setValor(expectedValor);
+        Mockito.when(repository.save(servico)).thenReturn(servico);
 
         assertNull(servico.getId());
 
         final var result = useCase.execute(servico);
 
-        Mockito.when(repository.save(servico)).thenReturn(servico);
+
         verify(repository, times(1)).save(servico);
 
         assertEquals(expectedNome, result.getNome());
