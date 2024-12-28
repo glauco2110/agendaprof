@@ -1,6 +1,7 @@
 package br.com.agendaprof.auth.rest;
 
 import br.com.agendaprof.auth.command.LoginCommand;
+import br.com.agendaprof.auth.command.LoginOutput;
 import br.com.agendaprof.auth.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class AuthController {
     public ResponseEntity signin(LoginCommand dto) {
         Authentication authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
         List<String> authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-        var token = provider.createToken(dto.getUsername(), authorities);
+        LoginOutput token = provider.createToken(dto.getUsername(), authorities);
         return ResponseEntity.ok(token);
     }
 

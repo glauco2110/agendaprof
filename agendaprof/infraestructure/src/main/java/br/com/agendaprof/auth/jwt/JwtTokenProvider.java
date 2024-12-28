@@ -1,5 +1,6 @@
 package br.com.agendaprof.auth.jwt;
 
+import br.com.agendaprof.auth.command.LoginOutput;
 import br.com.agendaprof.core.exceptions.InvalidJwtAuthenticationException;
 import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
@@ -33,19 +34,22 @@ public class JwtTokenProvider {
 		secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
 	}
 	
-	public String createToken(String username, List<String> roles) {
+	public LoginOutput createToken(String username, List<String> roles) {
 		ClaimsBuilder claims = Jwts.claims().setSubject(username);
 		claims.add("roles", roles);
 		
 		Date now = new Date();
 		Date validity = new Date(now.getTime() + validityInMilliseconds);
 		
-		return Jwts.builder()
+		String token = Jwts.builder()
 				.setClaims(claims.build())
 				.setIssuedAt(now)
 				.setExpiration(validity)
 				.signWith(SignatureAlgorithm.HS256, secretKey)
 				.compact();
+
+		LoginOutput output = new LoginOutput(token);
+		return output;
 	}
 	
 	public Authentication getAuthentication(String token) {
