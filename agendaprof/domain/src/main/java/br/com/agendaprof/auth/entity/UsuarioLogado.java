@@ -1,18 +1,15 @@
 package br.com.agendaprof.auth.entity;
 
-import br.com.agendaprof.core.domain.entity.BaseEntity;
 import br.com.agendaprof.usuario.entity.EnumRoles;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
-public class UsuarioLogado extends BaseEntity {
-    private String nome;
+public class UsuarioLogado {
     private String login;
-    private Date ultimoLogin;
-    private List<EnumRoles> permissoes;
+    private String senha;
+    private Set<EnumRoles> permissoes;
 }

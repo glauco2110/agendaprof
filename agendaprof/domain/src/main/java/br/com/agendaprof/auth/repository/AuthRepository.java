@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.Optional;
 
 public interface AuthRepository {
-    Optional<UsuarioLogado> signin(String login, String senha);
-
-    void atualizaUltimoLogin(Long id, Date date);
+    Optional<UsuarioLogado> signin(String login);
+    void atualizaUltimoLogin(String login, Date date);
 }

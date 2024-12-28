@@ -18,6 +18,7 @@ public class UsuarioMapper extends BaseMapper<Usuario, UsuarioData> {
         usuario.setUltimoLogin(data.getUltimoLogin());
         usuario.setCreatedAt(data.getCreatedAt());
         usuario.setUpdatedAt(data.getUpdatedAt());
+        usuario.setPermissoes(data.getPermissoes());
         return usuario;
     }
 
@@ -32,6 +33,7 @@ public class UsuarioMapper extends BaseMapper<Usuario, UsuarioData> {
         data.setCreatedAt(domain.getCreatedAt());
         data.setUpdatedAt(domain.getUpdatedAt());
         data.setSenha(domain.getSenha().getValor());
+        data.setPermissoes(domain.getPermissoes());
         return data;
     }
 }

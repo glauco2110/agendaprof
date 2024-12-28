@@ -28,6 +28,7 @@ public class InserirUsuario implements UseCase<InserirUsuarioCommand, InserirUsu
         usuario.setSenha(senha);
         usuario.setLogin(command.login());
         usuario.setNome(command.nome());
+        usuario.setPermissoes(command.permissoes());
 
         regras.execute(usuario);
 

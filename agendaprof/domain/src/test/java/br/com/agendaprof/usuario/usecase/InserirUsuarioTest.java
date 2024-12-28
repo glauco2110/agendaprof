@@ -2,6 +2,7 @@ package br.com.agendaprof.usuario.usecase;
 
 import br.com.agendaprof.core.exceptions.RegraNegocioException;
 import br.com.agendaprof.usuario.command.InserirUsuarioCommand;
+import br.com.agendaprof.usuario.entity.EnumRoles;
 import br.com.agendaprof.usuario.entity.Senha;
 import br.com.agendaprof.usuario.entity.Usuario;
 import br.com.agendaprof.usuario.repository.UsuarioRepository;
@@ -12,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.Date;
-import java.util.Optional;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -50,7 +48,7 @@ public class InserirUsuarioTest {
         final var expectedSenha = "123@456";
         final var senha = new Senha("6AutLCJNOpFCutVn2VP9nA==:$argon2id$v=19$m=65536,t=3,p=1$mPMJS/g2Y6Jg8PWA5JTtdA$K90jsTpi8N6gWK4rqBzyBAhDT1gvLKzmOXhb4gFQnc4", Senha.Status.HASHED);
 
-        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha);
+        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha, Set.of(EnumRoles.ADMIN));
 
         Usuario usuario = new Usuario();
         usuario.setSenha(senha);
@@ -82,7 +80,7 @@ public class InserirUsuarioTest {
         final var expectedSenha = "";
         final var expectedMessage = MSG_SENHA_VAZIA;
 
-        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha);
+        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha, Set.of(EnumRoles.ADMIN));
 
         final var result = assertThrows(RegraNegocioException.class, () -> useCase.execute(command));
 
@@ -96,7 +94,7 @@ public class InserirUsuarioTest {
         final var expectedSenha = "123456";
         final var expectedMessage = MSG_SENHA_INVALIDA;
 
-        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha);
+        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha, Set.of(EnumRoles.ADMIN));
 
         final var result = assertThrows(RegraNegocioException.class, () -> useCase.execute(command));
 
@@ -110,7 +108,7 @@ public class InserirUsuarioTest {
         final var expectedSenha = "12345";
         final var expectedMessage = MSG_SENHA_MENOR_QUE_SEIS_CARACTERES;
 
-        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha);
+        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha, Set.of(EnumRoles.ADMIN));
 
         final var result = assertThrows(RegraNegocioException.class, () -> useCase.execute(command));
 
@@ -125,7 +123,7 @@ public class InserirUsuarioTest {
         final var expectedMessage = LOGIN_DUPLICADO;
         final var senha = new Senha("6AutLCJNOpFCutVn2VP9nA==:$argon2id$v=19$m=65536,t=3,p=1$mPMJS/g2Y6Jg8PWA5JTtdA$K90jsTpi8N6gWK4rqBzyBAhDT1gvLKzmOXhb4gFQnc4", Senha.Status.HASHED);
 
-        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha);
+        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha, Set.of(EnumRoles.ADMIN));
 
         Usuario usuario = new Usuario();
         usuario.setSenha(senha);
@@ -152,7 +150,7 @@ public class InserirUsuarioTest {
         final var expectedMessage = NOME_OBRIGATORIO;
         final var senha = new Senha("6AutLCJNOpFCutVn2VP9nA==:$argon2id$v=19$m=65536,t=3,p=1$mPMJS/g2Y6Jg8PWA5JTtdA$K90jsTpi8N6gWK4rqBzyBAhDT1gvLKzmOXhb4gFQnc4", Senha.Status.HASHED);
 
-        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha);
+        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha, Set.of(EnumRoles.ADMIN));
 
         Usuario usuario = new Usuario();
         usuario.setSenha(senha);
@@ -178,7 +176,7 @@ public class InserirUsuarioTest {
         final var expectedMessage = NOME_OBRIGATORIO;
         final var senha = new Senha("6AutLCJNOpFCutVn2VP9nA==:$argon2id$v=19$m=65536,t=3,p=1$mPMJS/g2Y6Jg8PWA5JTtdA$K90jsTpi8N6gWK4rqBzyBAhDT1gvLKzmOXhb4gFQnc4", Senha.Status.HASHED);
 
-        final var command = new InserirUsuarioCommand(null, expectedLogin, expectedSenha);
+        final var command = new InserirUsuarioCommand(null, expectedLogin, expectedSenha, Set.of(EnumRoles.ADMIN));
 
         Usuario usuario = new Usuario();
         usuario.setSenha(senha);
@@ -205,7 +203,7 @@ public class InserirUsuarioTest {
         final var expectedMessage = LOGIN_OBRIGATORIO;
         final var senha = new Senha("6AutLCJNOpFCutVn2VP9nA==:$argon2id$v=19$m=65536,t=3,p=1$mPMJS/g2Y6Jg8PWA5JTtdA$K90jsTpi8N6gWK4rqBzyBAhDT1gvLKzmOXhb4gFQnc4", Senha.Status.HASHED);
 
-        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha);
+        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, expectedSenha, Set.of(EnumRoles.ADMIN));
 
         Usuario usuario = new Usuario();
         usuario.setSenha(senha);
@@ -231,7 +229,7 @@ public class InserirUsuarioTest {
         final var expectedMessage = LOGIN_OBRIGATORIO;
         final var senha = new Senha("6AutLCJNOpFCutVn2VP9nA==:$argon2id$v=19$m=65536,t=3,p=1$mPMJS/g2Y6Jg8PWA5JTtdA$K90jsTpi8N6gWK4rqBzyBAhDT1gvLKzmOXhb4gFQnc4", Senha.Status.HASHED);
 
-        final var command = new InserirUsuarioCommand(expectedNome, null, expectedSenha);
+        final var command = new InserirUsuarioCommand(expectedNome, null, expectedSenha, Set.of(EnumRoles.ADMIN));
 
         Usuario usuario = new Usuario();
         usuario.setSenha(senha);
@@ -257,7 +255,7 @@ public class InserirUsuarioTest {
         final var expectedMessage = SENHA_OBRIGATORIO;
         final var senha = new Senha("6AutLCJNOpFCutVn2VP9nA==:$argon2id$v=19$m=65536,t=3,p=1$mPMJS/g2Y6Jg8PWA5JTtdA$K90jsTpi8N6gWK4rqBzyBAhDT1gvLKzmOXhb4gFQnc4", Senha.Status.HASHED);
 
-        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, null);
+        final var command = new InserirUsuarioCommand(expectedNome, expectedLogin, null, Set.of(EnumRoles.ADMIN));
 
         Usuario usuario = new Usuario();
         usuario.setSenha(senha);

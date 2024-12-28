@@ -1,9 +1,7 @@
-package br.com.agendaprof.auth.persistence.repository;
+package br.com.agendaprof.auth.repository;
 
 import br.com.agendaprof.auth.entity.UsuarioLogado;
 import br.com.agendaprof.auth.mapper.UsuarioLogadoMapper;
-import br.com.agendaprof.auth.persistence.repository.data.AuthDataRepository;
-import br.com.agendaprof.auth.repository.AuthRepository;
 import br.com.agendaprof.usuario.persistence.entity.UsuarioData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -19,8 +17,8 @@ public class AuthRepositoryImpl implements AuthRepository {
     private final UsuarioLogadoMapper mapper;
 
     @Override
-    public Optional<UsuarioLogado> signin(String login, String senha) {
-        UsuarioData data = repository.signin(login, senha);
+    public Optional<UsuarioLogado> signin(String login) {
+        UsuarioData data = repository.signin(login);
         if(data != null) {
             return Optional.of(mapper.toDomain(data));
         }
@@ -28,8 +26,8 @@ public class AuthRepositoryImpl implements AuthRepository {
     }
 
     @Override
-    public void atualizaUltimoLogin(Long id, Date date) {
-        repository.atualizaUltimoLogin(id, date);
+    public void atualizaUltimoLogin(String login, Date date) {
+        repository.atualizaUltimoLogin(login, date);
     }
 
 }

@@ -5,8 +5,8 @@ CREATE TABLE TB_USUARIO
     login        varchar(255) NOT NULL,
     senha        varchar(500) NOT NULL,
     ultimo_login timestamp,
-    created_at   timestamp,
-    updated_at   timestamp,
+    created_at   timestamp NOT NULL default CURRENT_TIMESTAMP,
+    updated_at   timestamp NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT USUARIO_PKEY PRIMARY KEY (id_usuario),
     CONSTRAINT USUARIO_UKEY UNIQUE (login)
 );
