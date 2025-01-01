@@ -1,4 +1,4 @@
-package br.com.agendaprof.auth.jwt;
+package br.com.agendaprof.auth.provider;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -8,11 +8,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @RequiredArgsConstructor
 public class JwtConfigurer extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-    private final JwtTokenProvider tokenProvider;
+
+    private final JwtTokenFilter customFilter;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        JwtTokenFilter customFilter = new JwtTokenFilter(tokenProvider);
         http.addFilterBefore(customFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }

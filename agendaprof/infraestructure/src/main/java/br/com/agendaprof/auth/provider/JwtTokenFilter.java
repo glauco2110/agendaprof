@@ -1,4 +1,4 @@
-package br.com.agendaprof.auth.jwt;
+package br.com.agendaprof.auth.provider;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -15,14 +15,16 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtTokenFilter extends GenericFilterBean {
 
-    private final JwtTokenProvider tokenProvider;
+    private final ResolveTokenProvider provider;
+    private final ValidateTokenProvider validator;
+    private final GetAuthenticationProvider authentication;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String token = tokenProvider.resolveToken((HttpServletRequest) request);
+        String token = provider.resolve((HttpServletRequest) request);
 
-        if (token != null && tokenProvider.validateToken(token)) {
-            Authentication auth = tokenProvider.getAuthentication(token);
+        if (token != null && validator.validate(token)) {
+            Authentication auth = (Authentication) authentication.getAuthentication(token);
             if (auth != null) {
                 SecurityContextHolder.getContext().setAuthentication(auth);
             }

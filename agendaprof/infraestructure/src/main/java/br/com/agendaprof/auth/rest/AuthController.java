@@ -2,7 +2,7 @@ package br.com.agendaprof.auth.rest;
 
 import br.com.agendaprof.auth.command.LoginCommand;
 import br.com.agendaprof.auth.command.LoginOutput;
-import br.com.agendaprof.auth.jwt.JwtTokenProvider;
+import br.com.agendaprof.auth.provider.CreateTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class AuthController {
 
     private final AuthenticationManager manager;
-    private final JwtTokenProvider provider;
+    private final CreateTokenProvider provider;
 
     @PostMapping
     @Transactional
@@ -33,7 +33,7 @@ public class AuthController {
     public ResponseEntity signin(LoginCommand dto) {
         Authentication authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(dto.getUsername(), dto.getPassword()));
         List<String> authorities = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
-        LoginOutput token = provider.createToken(dto.getUsername(), authorities);
+        LoginOutput token = provider.create(dto.getUsername(), authorities);
         return ResponseEntity.ok(token);
     }
 
