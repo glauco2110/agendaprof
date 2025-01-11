@@ -47,6 +47,7 @@ class UsuarioControllerTest {
 
     @Test
     void testIncluir() throws Exception {
+
         String usuarioJson = "{ \"nome\": \"Test User\", \"email\": \"test@example.com\", \"senha\": \"123@456\" }";
 
         mockMvc.perform(post("/usuarios")
