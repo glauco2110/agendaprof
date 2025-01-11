@@ -14,7 +14,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class UsuarioRegras extends BaseRegras<Usuario> {
-    private final static String LOGIN_DUPLICADO = "Já existe um usuario cadastrado com este login";
+    private static final String LOGIN_DUPLICADO = "Já existe um usuario cadastrado com este login";
     private final UsuarioRepository repository;
 
     @Override
