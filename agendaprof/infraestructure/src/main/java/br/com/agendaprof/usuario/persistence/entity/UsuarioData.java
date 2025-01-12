@@ -46,9 +46,4 @@ public class UsuarioData extends BaseEntityData {
     @Enumerated(EnumType.STRING)
     private Set<EnumRoles> permissoes;
 
-    public UsuarioData(String login, String senha, Set<EnumRoles> permissoes) {
-        this.login = login;
-        this.senha = senha;
-        this.permissoes = permissoes;
-    }
 }

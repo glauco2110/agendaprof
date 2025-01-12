@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @E2ETest
 @Testcontainers
-public class LoginControllerTest {
+public class AuthControllerTest {
 
     @Container
     private static final PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:15")
