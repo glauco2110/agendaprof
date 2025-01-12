@@ -11,7 +11,7 @@ import java.util.Date;
 @Repository
 public interface AuthDataRepository extends CrudRepository<UsuarioData, Long> {
 
-    @Query("SELECT u.login, u.senha, u.permissoes from UsuarioData u where u.login = :login")
+    @Query("SELECT u from UsuarioData u where u.login = :login")
     UsuarioData signin(String login);
 
     @Modifying

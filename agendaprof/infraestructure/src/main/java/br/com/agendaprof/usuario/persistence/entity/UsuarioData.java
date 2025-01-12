@@ -4,6 +4,7 @@ import br.com.agendaprof.core.infra.entity.BaseEntityData;
 import br.com.agendaprof.usuario.entity.EnumRoles;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "TB_USUARIO")
 public class UsuarioData extends BaseEntityData {
 
@@ -43,4 +45,10 @@ public class UsuarioData extends BaseEntityData {
     @Column(name = "permissao")
     @Enumerated(EnumType.STRING)
     private Set<EnumRoles> permissoes;
+
+    public UsuarioData(String login, String senha, Set<EnumRoles> permissoes) {
+        this.login = login;
+        this.senha = senha;
+        this.permissoes = permissoes;
+    }
 }

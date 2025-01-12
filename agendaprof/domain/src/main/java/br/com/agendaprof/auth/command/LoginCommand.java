@@ -1,5 +1,6 @@
 package br.com.agendaprof.auth.command;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

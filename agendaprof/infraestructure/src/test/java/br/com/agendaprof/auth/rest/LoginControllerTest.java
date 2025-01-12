@@ -1,6 +1,8 @@
-package br.com.agendaprof.usuario.rest;
+package br.com.agendaprof.auth.rest;
 
 import br.com.agendaprof.E2ETest;
+import br.com.agendaprof.auth.command.LoginCommand;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -17,8 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @E2ETest
 @Testcontainers
-class UsuarioControllerTest {
-
+public class LoginControllerTest {
 
     @Container
     private static final PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:15")
@@ -30,6 +31,8 @@ class UsuarioControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private ObjectMapper mapper;
 
     @BeforeAll
     public static void setUp() {
@@ -45,13 +48,20 @@ class UsuarioControllerTest {
     }
 
     @Test
-    void testIncluir() throws Exception {
+    void dadoQueTenhoUsuarioESenhaValidos_QuandoTentarExecutarLogin_DeveSerRealizadoComSucesso() throws Exception {
         assertTrue(postgreSQLContainer.isRunning());
-        String usuarioJson = "{ \"username\": \"admin\", \"email\": \"test@example.com\", \"senha\": \"123@456\" }";
+        LoginCommand command = new LoginCommand();
+        command.setUsername("admin");
+        command.setPassword("123@456");
 
-        mockMvc.perform(post("/usuarios")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(usuarioJson))
-                .andExpect(status().isCreated());
+        final var request = post("/auth")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.mapper.writeValueAsString(command));
+
+        final var response = mockMvc.perform(request)
+                .andExpect(status().isOk())
+                .andReturn();
+
     }
+
 }
