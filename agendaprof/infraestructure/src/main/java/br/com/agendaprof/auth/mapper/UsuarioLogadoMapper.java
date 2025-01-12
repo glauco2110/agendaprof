@@ -42,7 +42,7 @@ public class UsuarioLogadoMapper extends BaseMapper<UsuarioLogado, UsuarioData> 
         if(domain == null) return null;
         UsuarioLogadoAuth usuarioLogadoAuth = new UsuarioLogadoAuth();
         usuarioLogadoAuth.setLogin(domain.getLogin());
-        usuarioLogadoAuth.setSenha(domain.getSenha());
+        usuarioLogadoAuth.setSenha("{noop}" + domain.getSenha());
         usuarioLogadoAuth.setPermissoes(toPermissoes(domain.getPermissoes()));
         return usuarioLogadoAuth;
     }
