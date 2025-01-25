@@ -62,6 +62,7 @@ public class AuthControllerTest {
                 .andExpect(status().isOk())
                 .andReturn();
 
+
     }
 
 }

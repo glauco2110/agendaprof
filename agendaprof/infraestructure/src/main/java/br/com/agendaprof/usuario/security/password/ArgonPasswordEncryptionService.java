@@ -45,6 +45,16 @@ public class ArgonPasswordEncryptionService implements PasswordEncryptionService
         }
     }
 
+    @Override
+    public String getPepper() {
+        return ArgonPasswordEncryptionService.PEPPER;
+    }
+
+    @Override
+    public int getSaltLength() {
+        return ArgonPasswordEncryptionService.SALT_LENGTH;
+    }
+
     private String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[SALT_LENGTH];
