@@ -24,6 +24,7 @@
     <modules>
         <module>domain</module>
         <module>infraestructure</module>
+        <module>report-aggregate</module>
     </modules>
     <scm>
         <connection/>
