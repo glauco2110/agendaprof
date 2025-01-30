@@ -18,7 +18,7 @@ public class SecurityConfig  {
                 .csrf(csrf -> csrf.disable()) // Desabilite CSRF se não for necessário
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth").permitAll() // URLs públicas
-                        .anyRequest().authenticated() // Todas as outras precisam de autenticação
+                        .anyRequest().permitAll() // Todas as outras precisam de autenticação
                 )
                 .formLogin(form -> form
                         .loginPage("/login") // Página de login customizada
